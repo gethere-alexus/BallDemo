@@ -62,8 +62,7 @@ namespace CodeBase.Sources.Modules.Ball.Presenter
             
             ForceAngleDirection = Vector2.SignedAngle(ReferenceDirection, CurrentDirection);
             ApplyingClearForce = CurrentDistance > MinDistanceToForce ? CurrentDistance * DistanceToForceCoefficient : CustomPhysics.NoForce;   
-            
-            Debug.Log($"Started {_startPosition}, ended {_endPosition}");
+          
             ApplyingForceChanged?.Invoke();
         }
 

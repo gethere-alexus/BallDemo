@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CodeBase.Sources.Effects
+namespace CodeBase.Sources.Modules.Effects
 {
     [RequireComponent(typeof(ParticleSystem))]
     public class OneTimeEffect : MonoBehaviour
