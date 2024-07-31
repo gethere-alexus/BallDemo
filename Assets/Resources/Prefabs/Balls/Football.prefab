@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455732265724352014}
-  - component: {fileID: 1243210842744544398}
   - component: {fileID: 362839945636638392}
+  - component: {fileID: 500521527171852142}
+  - component: {fileID: 1729483506372147390}
   - component: {fileID: 7516362359100465482}
   - component: {fileID: 798043303319862317}
   - component: {fileID: 7693126866552717443}
@@ -37,18 +38,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1243210842744544398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4947449230874045840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f68ee9c89ea4579b885b841b5d0313f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &362839945636638392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +48,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 132a722a08084745b58d92309bf46b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transformView: {fileID: 500521527171852142}
+--- !u!114 &500521527171852142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947449230874045840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b637842618c49a29ef1c4916d438fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1729483506372147390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947449230874045840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489a77f67250439381d759bfa79556df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!33 &7516362359100465482
