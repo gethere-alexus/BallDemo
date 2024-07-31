@@ -1,11 +1,11 @@
-using Ball.Input;
 using Ball.Model;
+using Ball.Modules.Input;
+using Ball.Modules.Physics;
 using Ball.View;
-using Ball.View.ForceView;
+using Ball.View.Modules;
 using Infrastructure.Factories.EffectsFactory;
 using Infrastructure.Services.InputService;
 using MVPBase;
-using Physics;
 using UnityEngine;
 
 namespace Ball.Presenter

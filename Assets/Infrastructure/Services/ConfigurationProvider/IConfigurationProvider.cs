@@ -1,3 +1,4 @@
+using Infrastructure.Factories.CameraFollowerFactory;
 using Infrastructure.Services.ConfigurationProvider.API;
 
 namespace Infrastructure.Services.ConfigurationProvider

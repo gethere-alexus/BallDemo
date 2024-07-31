@@ -1,4 +1,3 @@
-using Ball.Presenter;
 using Ball.View;
 using Infrastructure.Factories.BallFactory;
 using Infrastructure.Factories.CoinFactory;

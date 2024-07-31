@@ -7,6 +7,7 @@ using Infrastructure.Services.ConfigurationProvider;
 using Infrastructure.Services.ConfigurationProvider.API;
 using Infrastructure.StaticData;
 using UnityEngine;
+using Utils.Extensions;
 using Zenject;
 using IPrefabProvider = Infrastructure.Services.PrefabProvider.IPrefabProvider;
 
@@ -25,9 +26,6 @@ namespace Infrastructure.Factories.CoinFactory
             _prefabProvider = prefabProvider;
             
             configurationProvider.LoadConfiguration(this);
-            
-            BindModel();
-            BindPresenter();
         }
 
         public void LoadConfiguration(GameConfiguration gameConfiguration) => 
@@ -35,24 +33,29 @@ namespace Infrastructure.Factories.CoinFactory
 
         public CoinPresenter CreateCoin(Vector3 at, Transform parent)
         {
-            CoinView coin = _prefabProvider.InstantiateWithContainer<CoinView>(_container,PrefabPaths.Coin, at, Quaternion.identity);
-            coin.transform.SetParent(parent);
+            CoinModel coinModel = ConstructModel();
             
-            return coin.CoinPresenter;
+            CoinView coinView = _prefabProvider.InstantiateWithContainer<CoinView>(_container,PrefabPaths.Coin, at,  Quaternion.identity);
+            coinView.transform.SetParent(parent);
+
+            CoinPresenter coinPresenter = _container.Instantiate<CoinPresenter>()
+                .With(presenter => presenter.LinkPresenter(coinModel, coinView));
+
+            return coinPresenter;
         }
 
-        private void BindModel()
+        private CoinModel ConstructModel()
         {
-            CoinModel model = new CoinModel
-            {
-                CoinsAmount = _coinConfiguration.ReceivingCoins,
-            };
+            CoinConfiguration config = _coinConfiguration;
 
-            _container.Bind<CoinModel>().FromInstance(model).AsTransient();
+            CoinModel model = new CoinModel()
+                .With(model => model.SetClaimingCoins(config.ReceivingCoins))
+                .With(model => model.SetAnimationConfiguration(config.AnimationTimeToDisappear))
+                .With(model => model.SetRotationSpeed(config.RotationSpeed));
+            
+            return model;
         }
         
-        private void BindPresenter() => 
-            _container.Bind<CoinPresenter>().FromNewComponentSibling().AsTransient();
         
     }
 }

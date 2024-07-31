@@ -1,3 +1,4 @@
+using Infrastructure.Data.Configurations.Ball.Modules;
 using UnityEngine;
 
 namespace Infrastructure.Data.Configurations.Ball

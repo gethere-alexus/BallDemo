@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: CoinConfiguration
   m_EditorClassIdentifier: 
   _receivingCoins: 50
+  _animationTimeToDisappear: 0.25
+  _rotationSpeed: 0.75

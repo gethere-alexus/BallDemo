@@ -1,18 +1,14 @@
-using Camera;
+using Infrastructure.Factories.CameraFollowerFactory;
 using Infrastructure.Services.GameBuilder;
 using UnityEngine;
+using Utils.Extensions;
 using Zenject;
 
 namespace Infrastructure.Installers.SceneContext
 {
     public class CameraInstaller : MonoInstaller, IInitializable
     {
-        [SerializeField] private float _followSpeed;
-        
-        [SerializeField] private Vector3 _positionOffset;
-        [SerializeField] private Vector3 _cameraRotation;
-        
-        [SerializeField] private UnityEngine.Camera _mainCamera;
+        [SerializeField] private Camera _mainCamera;
         
         public override void InstallBindings() => 
             Container.BindInterfacesTo<CameraInstaller>().FromInstance(this).AsSingle();
@@ -20,10 +16,13 @@ namespace Infrastructure.Installers.SceneContext
         public void Initialize()
         {
             IGameBuilder gameBuilder = Container.Resolve<IGameBuilder>();
-            CameraFollower cameraFollower = _mainCamera.gameObject.AddComponent<CameraFollower>();
+            ICameraFollowerFactory followerFactory = Container.Resolve<ICameraFollowerFactory>();
 
-            cameraFollower.Configure(followSpeed: _followSpeed, offset: _positionOffset, rotation: _cameraRotation);
-            cameraFollower.SetTrack(gameBuilder.BallInstance.transform);
+            Transform target = gameBuilder.BallInstance.transform;
+            
+            followerFactory.CreateCameraFollower(_mainCamera)
+                .With(follower => follower.SetTrack(target));
+            
         }
     }
 }

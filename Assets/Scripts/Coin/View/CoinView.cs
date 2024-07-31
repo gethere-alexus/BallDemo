@@ -1,57 +1,37 @@
-using System.Collections;
-using Coin.Presenter;
-using DG.Tweening;
+using System;
+using MVPBase;
 using UnityEngine;
-using Zenject;
 
 namespace Coin.View
 {
-    public class CoinView : MonoBehaviour
+    public class CoinView : ViewBase
     {
         [SerializeField] private GameObject _coinGameObject;
-        [SerializeField] private float _timeToDisappear;
-        [SerializeField] private ParticleSystem _passiveAura;
-        [SerializeField] private ParticleSystem _onDestroyedParticles;
 
-        public CoinPresenter CoinPresenter { get; private set; }
+        private float _rotationSpeed;
+        public event Action<Collider> TriggerEntered;
+        public event Action Enabling, Disabling;
 
-        [Inject]
-        public void Construct(CoinPresenter coinPresenter)
+        public GameObject CoinGameObject => _coinGameObject;
+
+        public void SetRotationSpeed(float rotationSpeed) => 
+            _rotationSpeed = rotationSpeed;
+        
+        private void OnEnable() => 
+            Enabling?.Invoke();
+
+        private void FixedUpdate()
         {
-            CoinPresenter = coinPresenter;
+            if(HasRotationSpeed)
+                transform.Rotate(new Vector3(0, _rotationSpeed, 0));
         }
 
-        private void OnEnable()
-        {
-            if (CoinPresenter != null)
-                CoinPresenter.CoinClaimed += OnCoinClaimed;
-        }
+        private void OnDisable() => 
+            Disabling?.Invoke();
 
-        private void OnDisable()
-        {
-            if (CoinPresenter != null)
-                CoinPresenter.CoinClaimed -= OnCoinClaimed;
-        }
+        private void OnTriggerEnter(Collider collidedWith) =>
+            TriggerEntered?.Invoke(collidedWith);
 
-        private void OnCoinClaimed()
-        {
-            _passiveAura.gameObject.SetActive(false);
-            StartCoroutine(AnimateDestruction());
-        }
-
-        private IEnumerator AnimateDestruction()
-        {
-            Vector3 zeroScale = new Vector3(0, 0, 0);
-            
-            Tween scaleOperation = _coinGameObject.transform.DOScale(zeroScale, _timeToDisappear);
-            while (scaleOperation.IsActive())
-                yield return null;
-            
-            _onDestroyedParticles.Play();
-            while (_onDestroyedParticles.isPlaying)
-                yield return null;
-            
-            Destroy(gameObject);
-        }
+        private bool HasRotationSpeed => _rotationSpeed != 0;
     }
 }

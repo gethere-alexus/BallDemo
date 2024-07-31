@@ -7,6 +7,9 @@ namespace Infrastructure.StaticData
         public const string BallStorage = "Prefabs/Balls/";
         public const string UIRoot = "Prefabs/UI/UI_Root";
         public const string WalletPanel = "Prefabs/UI/WalletView";
+        
         public const string CloudEffect = "Prefabs/Effects/CloudsEffect";
+        public const string CoinAura = "Prefabs/Effects/CoinAuraEffect";
+        public const string CoinExplosion = "Prefabs/Effects/CoinExplosionEffect";
     }
 }

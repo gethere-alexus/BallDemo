@@ -1,3 +1,4 @@
+using Infrastructure.Factories.CameraFollowerFactory;
 using Infrastructure.Factories.EffectsFactory;
 using Infrastructure.Factories.GameStateFactory;
 using Infrastructure.Factories.UIFactory;
@@ -37,10 +38,15 @@ namespace Infrastructure.Installers.CompositionRoot
             
             BindGameStateFactory();
 
+            BindCameraFollowerFactory();
+            
             BindGameMachine();
 
             BindGameBuilder();
         }
+
+        private void BindCameraFollowerFactory() => 
+            Container.BindInterfacesTo<CameraFollowerFactory>().AsSingle();
 
         private void BindProgressProvider()
         {

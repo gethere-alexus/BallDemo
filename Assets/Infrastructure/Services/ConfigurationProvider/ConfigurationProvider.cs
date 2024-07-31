@@ -1,6 +1,7 @@
 using System.IO;
 using Infrastructure.Data.Configurations;
 using Infrastructure.Data.Configurations.Ball;
+using Infrastructure.Data.Configurations.CameraFollower;
 using Infrastructure.Data.Configurations.Coin;
 using Infrastructure.Data.Configurations.Progress;
 using Infrastructure.Services.ConfigurationProvider.API;
@@ -26,6 +27,7 @@ namespace Infrastructure.Services.ConfigurationProvider
                 BallConfiguration = LoadConfig<BallConfiguration>(ConfigurationsPath.Ball),
                 CoinConfiguration = LoadConfig<CoinConfiguration>(ConfigurationsPath.Coin),
                 InitialProgress = LoadConfig<InitialProgress>(ConfigurationsPath.InitProgress),
+                CameraFollowerConfiguration = LoadConfig<CameraFollowerConfiguration>(ConfigurationsPath.CameraFollower)
             };
         }
 

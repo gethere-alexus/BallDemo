@@ -5,6 +5,6 @@ namespace Infrastructure.StaticData
         public const string Ball = "BallConfiguration";
         public const string Coin = "CoinConfiguration";
         public const string InitProgress = "InitialProgress";
-        public const string InputProcessing = "InputProcessingConfiguration";
+        public const string CameraFollower = "CameraFollowerConfiguration";
     }
 }

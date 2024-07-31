@@ -6,7 +6,11 @@ namespace Infrastructure.Data.Configurations.Coin
     public class CoinConfiguration : ScriptableObject
     {
         [SerializeField] private int _receivingCoins;
-
+        [SerializeField] private float _animationTimeToDisappear;
+        [SerializeField] private float _rotationSpeed;
+        
+        public float RotationSpeed => _rotationSpeed;
+        public float AnimationTimeToDisappear => _animationTimeToDisappear;
         public int ReceivingCoins => _receivingCoins;
     }
 }

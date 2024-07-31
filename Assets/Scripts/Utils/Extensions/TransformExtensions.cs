@@ -16,5 +16,7 @@ namespace Utils.Extensions
 
             return toReturn.ToArray();
         }
+
+        public static Vector3 Position(this GameObject gameObject) => gameObject.transform.position;
     }
 }

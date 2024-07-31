@@ -16,7 +16,9 @@ namespace Infrastructure.Factories.EffectsFactory
             _prefabProvider = prefabProvider;
             _effects = new Dictionary<EffectType, ParticleSystem>
             {
-                { EffectType.HitCloud , resourceLoader.Load<ParticleSystem>(PrefabPaths.CloudEffect)}
+                { EffectType.HitCloud , resourceLoader.Load<ParticleSystem>(PrefabPaths.CloudEffect)},
+                { EffectType.CoinExplosion , resourceLoader.Load<ParticleSystem>(PrefabPaths.CoinExplosion)},
+                { EffectType.CoinAura , resourceLoader.Load<ParticleSystem>(PrefabPaths.CoinAura)}
             };
         }
 

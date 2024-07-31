@@ -1,4 +1,4 @@
-using Ball.View.ForceView;
+using Ball.View.Modules;
 using Infrastructure.Factories.BallFactory;
 using Infrastructure.Factories.CoinFactory;
 using Infrastructure.Factories.MapFactory;
