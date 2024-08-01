@@ -1,14 +1,16 @@
 using System;
 using APIs.Activatable;
+using APIs.Configurable;
 using Ball.Modules.Physics;
 using Cysharp.Threading.Tasks;
+using Infrastructure.Data.GameConfiguration.Ball.Modules;
 using Infrastructure.Services.InputService;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Ball.Modules.Input
 {
-    public class BallInputProcessor : IActivatable
+    public class BallInputProcessor : IActivatable, IConfigurable<BallInputProcessingConfig>
     {
         private readonly IInputService _inputService;
 
@@ -31,16 +33,14 @@ namespace Ball.Modules.Input
         public float ApplyingClearForce { get; private set; }
 
 
-        public BallInputProcessor(IInputService inputService)
-        {
+        public BallInputProcessor(IInputService inputService) => 
             _inputService = inputService;
-        }
 
-        public void Configure(float minDistanceToApplyForce, float distanceToForceCoefficient, float baseAppliedForce)
+        public void Configure(BallInputProcessingConfig inputProcessingConfig)
         {
-            _minDistanceToApplyForce = minDistanceToApplyForce;
-            _distanceToForceCoefficient = distanceToForceCoefficient;
-            _baseAppliedForce = baseAppliedForce;
+            _minDistanceToApplyForce = inputProcessingConfig.MinDistanceToForce;
+            _distanceToForceCoefficient = inputProcessingConfig.DistanceToForceCoefficient;
+            _baseAppliedForce = inputProcessingConfig.BaseAppliedForce;
         }
 
         public void Enable()

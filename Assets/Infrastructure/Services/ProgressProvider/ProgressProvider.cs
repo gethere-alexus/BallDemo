@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using System.IO;
-using Infrastructure.Data.Configurations;
-using Infrastructure.Data.Progress;
+using APIs.GameConfigReader;
+using APIs.ProgressInteraction;
+using Infrastructure.Data.GameConfiguration;
+using Infrastructure.Data.GameProgress;
 using Infrastructure.Services.ConfigurationProvider;
-using Infrastructure.Services.ConfigurationProvider.API;
-using Infrastructure.Services.ProgressProvider.API;
 using Newtonsoft.Json;
 using UnityEngine;
 using File = System.IO.File;
 
 namespace Infrastructure.Services.ProgressProvider
 {
-    public class ProgressProvider : IProgressProvider, IConfigReader
+    public class ProgressProvider : IProgressProvider, IGameConfigReader
     {
         private List<IProgressReader> ProgressReaders { get; } = new();
         private List<IProgressWriter> ProgressWriters { get; } = new();

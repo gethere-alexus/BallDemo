@@ -1,10 +1,11 @@
 using System.IO;
-using Infrastructure.Data.Configurations;
-using Infrastructure.Data.Configurations.Ball;
-using Infrastructure.Data.Configurations.CameraFollower;
-using Infrastructure.Data.Configurations.Coin;
-using Infrastructure.Data.Configurations.Progress;
-using Infrastructure.Services.ConfigurationProvider.API;
+using APIs.GameConfigReader;
+using Infrastructure.Data.GameConfiguration;
+using Infrastructure.Data.GameConfiguration.Ball;
+using Infrastructure.Data.GameConfiguration.CameraFollower;
+using Infrastructure.Data.GameConfiguration.Coin;
+using Infrastructure.Data.GameConfiguration.Progress;
+using Infrastructure.Data.GameConfiguration.UI.CoinDisplay;
 using Infrastructure.Services.ResourceLoader;
 using Infrastructure.StaticData;
 using UnityEngine;
@@ -27,14 +28,15 @@ namespace Infrastructure.Services.ConfigurationProvider
                 BallConfiguration = LoadConfig<BallConfiguration>(ConfigurationsPath.Ball),
                 CoinConfiguration = LoadConfig<CoinConfiguration>(ConfigurationsPath.Coin),
                 InitialProgress = LoadConfig<InitialProgress>(ConfigurationsPath.InitProgress),
-                CameraFollowerConfiguration = LoadConfig<CameraFollowerConfiguration>(ConfigurationsPath.CameraFollower)
+                CameraFollowerConfiguration = LoadConfig<CameraFollowerConfiguration>(ConfigurationsPath.CameraFollower),
+                CoinDisplayConfiguration = LoadConfig<CoinDisplayConfiguration>(ConfigurationsPath.CoinDisplay),
             };
         }
 
         private TConfig LoadConfig<TConfig>(string id) where TConfig : ScriptableObject => 
             _resourceLoader.Load<TConfig>(Path.Combine(ConfigsPath, id));
 
-        public void LoadConfiguration(IConfigReader configReader) => 
-            configReader.LoadConfiguration(_gameConfiguration);
+        public void LoadConfiguration(IGameConfigReader gameConfigReader) => 
+            gameConfigReader.LoadConfiguration(_gameConfiguration);
     }
 }

@@ -1,10 +1,10 @@
+using APIs.GameConfigReader;
 using Coin.Model;
 using Coin.Presenter;
 using Coin.View;
-using Infrastructure.Data.Configurations;
-using Infrastructure.Data.Configurations.Coin;
+using Infrastructure.Data.GameConfiguration;
+using Infrastructure.Data.GameConfiguration.Coin;
 using Infrastructure.Services.ConfigurationProvider;
-using Infrastructure.Services.ConfigurationProvider.API;
 using Infrastructure.StaticData;
 using UnityEngine;
 using Utils.Extensions;
@@ -13,7 +13,7 @@ using IPrefabProvider = Infrastructure.Services.PrefabProvider.IPrefabProvider;
 
 namespace Infrastructure.Factories.CoinFactory
 {
-    public class CoinFactory : ICoinFactory, IConfigReader
+    public class CoinFactory : ICoinFactory, IGameConfigReader
     {
         private readonly IPrefabProvider _prefabProvider;
         private readonly DiContainer _container;

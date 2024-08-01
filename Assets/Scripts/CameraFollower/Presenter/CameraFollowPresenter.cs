@@ -1,4 +1,3 @@
-
 using System;
 using CameraFollower.Model;
 using CameraFollower.View;
@@ -23,6 +22,7 @@ namespace CameraFollower.Presenter
             
             _followView.Enabling += Enable;
             _followView.Disabling += Disable;
+            _followView.Destroying += Dispose;
             
             Enable();
         }
@@ -49,6 +49,7 @@ namespace CameraFollower.Presenter
         {
             _followView.Enabling -= Enable;
             _followView.Disabling -= Disable;
+            _followView.Destroying -= Dispose;
         }
 
         private void OnTrackUpdateRequested()

@@ -8,7 +8,9 @@ using Infrastructure.Factories.EffectsFactory;
 using MVPBase;
 using UnityEngine;
 using Utils.Extensions;
+using Utils.Extensions.Wallet;
 using Wallet;
+using Wallet.Balances.Coin;
 using Object = UnityEngine.Object;
 
 namespace Coin.Presenter
@@ -79,7 +81,7 @@ namespace Coin.Presenter
 
         private void ClaimCoin()
         {
-            _wallet.GetCurrencyBalance(CurrencyType.Coin).Add(_coinModel.CoinsToClaim);
+            _wallet.AddCurrency(CoinsToClaims.AsCurrency<CoinCurrency>());
             _isCoinClaimed = true;
 
             _coinView.StartCoroutine(AnimateDestruction());
@@ -101,5 +103,7 @@ namespace Coin.Presenter
             Dispose();
             Object.Destroy(_coinView.gameObject);
         }
+
+        private int CoinsToClaims => _coinModel.CoinsToClaim;
     }
 }

@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a8d2552df04f0d985cc1545862ac5d, type: 3}
   m_Name: BallConfiguration
   m_EditorClassIdentifier: 
-  _physicsConfiguration:
+  _physicsConfig:
     LinearDrag: 0.015
     AngularDrag: 0.015
-  _inputProcessingConfiguration:
+    StretchFactor: 1.5
+    MinVelocityToSquish: 0.1
+    SquishFactor: 0.25
+  _inputProcessingConfig:
     MinDistanceToForce: 100
     DistanceToForceCoefficient: 0.01
     BaseAppliedForce: 10
-  _squishConfiguration:
-    SquishFactor: 0.25
+  _squishAnimationConfig:
     SquishDuration: 0.35
-    MinVelocityToSquish: 0.1
-    StretchFactor: 1.5
     SquishColor: {r: 1, g: 0.4, b: 0.4, a: 1}
-  _forceScaleConfiguration:
+  _forceScaleConfig:
     MinimumDisplayedForceScale: 0.5
     MaximumDisplayedForceScale: 15

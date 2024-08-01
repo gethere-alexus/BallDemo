@@ -7,7 +7,7 @@ namespace CameraFollower.View
     public class CameraFollowView : ViewBase
     {
         public event Action TrackUpdateRequested;
-        public event Action Enabling, Disabling;
+        public event Action Enabling, Disabling, Destroying;
         
         public Vector3 CurrentPosition => transform.position;
 
@@ -21,5 +21,8 @@ namespace CameraFollower.View
 
         private void OnDisable() => 
             Disabling?.Invoke();
+
+        private void OnDestroy() => 
+            Destroying?.Invoke();
     }
 }

@@ -19,7 +19,7 @@ namespace Ball.Model
         public Color SquishColor { get; private set; }
 
 
-        public void SetInputProcessingConfiguration(float minDistanceToApplyForce, float distanceToForceCoefficient,
+        public void SetInputProcessingConfig(float minDistanceToApplyForce, float distanceToForceCoefficient,
             float baseAppliedForce)
         {
             MinDistanceToApplyForce = minDistanceToApplyForce;
@@ -27,25 +27,26 @@ namespace Ball.Model
             BaseAppliedForce = baseAppliedForce;
         }
 
-        public void SetForceScaleConfiguration(float minDisplayedForceScale, float maxDisplayedForceScale)
+        public void SetForceScaleConfig(float minDisplayedForceScale, float maxDisplayedForceScale)
         {
             MinDisplayedForceScale = minDisplayedForceScale;
             MaxDisplayedForceScale = maxDisplayedForceScale;
         }
 
-        public void SetSquishConfiguration(float minVelocityToSquish, float squishDuration, Color squishColor, float squishFactor, float stretchFactor)
+        public void SetSquishAnimationConfig(float squishDuration, Color squishColor)
         {
-            MinVelocityToSquish = minVelocityToSquish;
             SquishDuration = squishDuration;
             SquishColor = squishColor;
-            SquishFactor = squishFactor;
-            StretchFactor = stretchFactor;
         }
 
-        public void SetPhysicsConfiguration(float linearDrag, float angularDrag)
+        public void SetPhysicsConfig(float linearDrag, float angularDrag, float minVelocityToSquish, float squishFactor,
+            float stretchFactor)
         {
             LinearDrag = linearDrag;
             AngularDrag = angularDrag;
+            MinVelocityToSquish = minVelocityToSquish;
+            SquishFactor = squishFactor;
+            StretchFactor = stretchFactor;
         }
     }
 }

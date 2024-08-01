@@ -1,10 +1,9 @@
-using Infrastructure.Factories.CameraFollowerFactory;
-using Infrastructure.Services.ConfigurationProvider.API;
+using APIs.GameConfigReader;
 
 namespace Infrastructure.Services.ConfigurationProvider
 {
     public interface IConfigurationProvider
     {
-        public void LoadConfiguration(IConfigReader configReader);
+        public void LoadConfiguration(IGameConfigReader gameConfigReader);
     }
 }

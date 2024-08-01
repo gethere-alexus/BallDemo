@@ -1,11 +1,11 @@
+using APIs.GameConfigReader;
 using Ball.Model;
 using Ball.Presenter;
 using Ball.View;
-using Infrastructure.Data.Configurations;
-using Infrastructure.Data.Configurations.Ball;
-using Infrastructure.Data.Configurations.Ball.Modules;
+using Infrastructure.Data.GameConfiguration;
+using Infrastructure.Data.GameConfiguration.Ball;
+using Infrastructure.Data.GameConfiguration.Ball.Modules;
 using Infrastructure.Services.ConfigurationProvider;
-using Infrastructure.Services.ConfigurationProvider.API;
 using Infrastructure.StaticData;
 using UnityEngine;
 using Utils.Extensions;
@@ -14,7 +14,7 @@ using IPrefabProvider = Infrastructure.Services.PrefabProvider.IPrefabProvider;
 
 namespace Infrastructure.Factories.BallFactory
 {
-    public class BallFactory : IBallFactory, IConfigReader
+    public class BallFactory : IBallFactory, IGameConfigReader
     {
         private readonly DiContainer _diContainer;
         private readonly IPrefabProvider _prefabProvider;
@@ -36,36 +36,36 @@ namespace Infrastructure.Factories.BallFactory
 
         private BallModel ConstructModel()
         {
-            BallInputProcessingConfiguration inputProcessing =
-                _ballConfiguration.InputProcessingConfiguration;
+            BallInputProcessingConfig inputProcessing =
+                _ballConfiguration.InputProcessingConfig;
 
-            BallPhysicsConfiguration ballPhysics =
-                _ballConfiguration.PhysicsConfiguration;
+            BallPhysicsConfig ballPhysics =
+                _ballConfiguration.PhysicsConfig;
 
-            BallSquishConfiguration ballSquish =
-                _ballConfiguration.SquishConfiguration;
+            BallSquishAnimationConfig ballSquishAnimation =
+                _ballConfiguration.SquishAnimationConfig;
 
-            BallForceScaleConfiguration forceScale =
-                _ballConfiguration.ForceScaleConfiguration;
+            BallForceScaleConfig forceScale =
+                _ballConfiguration.ForceScaleConfig;
 
 
             BallModel model = new BallModel()
-                .With(model => model.SetPhysicsConfiguration(
+                .With(model => model.SetPhysicsConfig(
                     linearDrag: ballPhysics.LinearDrag,
-                    angularDrag: ballPhysics.AngularDrag))
-                .With(model => model.SetForceScaleConfiguration(
+                    angularDrag: ballPhysics.AngularDrag,
+                    minVelocityToSquish: ballPhysics.MinVelocityToSquish, 
+                    squishFactor: ballPhysics.SquishFactor,
+                    stretchFactor: ballPhysics.StretchFactor))
+                .With(model => model.SetForceScaleConfig(
                     minDisplayedForceScale: forceScale.MinimumDisplayedForceScale,
                     maxDisplayedForceScale: forceScale.MaximumDisplayedForceScale))
-                .With(model => model.SetInputProcessingConfiguration(
+                .With(model => model.SetInputProcessingConfig(
                     minDistanceToApplyForce: inputProcessing.MinDistanceToForce,
                     distanceToForceCoefficient: inputProcessing.DistanceToForceCoefficient,
                     baseAppliedForce: inputProcessing.BaseAppliedForce))
-                .With(model => model.SetSquishConfiguration(
-                    minVelocityToSquish: ballSquish.MinVelocityToSquish,
-                    squishDuration: ballSquish.SquishDuration,
-                    squishColor: ballSquish.SquishColor,
-                    squishFactor: ballSquish.SquishFactor,
-                    stretchFactor: ballSquish.StretchFactor));
+                .With(model => model.SetSquishAnimationConfig(
+                    squishDuration: ballSquishAnimation.SquishDuration,
+                    squishColor: ballSquishAnimation.SquishColor));
 
             return model;
         }
@@ -80,7 +80,7 @@ namespace Infrastructure.Factories.BallFactory
                 _prefabProvider.InstantiateWithContainer<BallView>(_diContainer, loadFrom, at, rotation);
 
             BallPresenter ballPresenter = _diContainer.Instantiate<BallPresenter>()
-                .With(presenter => presenter.LinkPresenter(model: ballModel, view: ballView));
+                .With(presenter => presenter.LinkPresenter(ballModel: ballModel, ballView: ballView));
 
             return ballView;
         }

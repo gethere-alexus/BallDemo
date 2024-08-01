@@ -1,14 +1,16 @@
+using APIs.Configurable;
+using Infrastructure.Data.GameConfiguration.Ball.Modules;
 using UnityEngine;
 
 namespace Ball.Modules.Physics
 {
-    public class BallPhysics
+    public class BallPhysics : IConfigurable<BallPhysicsConfig>
     {
         private float _linearDrag;
         private float _angularDrag;
         private float _squishFactor;
         private float _stretchFactor;
-        
+
         private Vector3 _currentVelocity;
         private Vector3 _currentAngularVelocity;
 
@@ -20,19 +22,21 @@ namespace Ball.Modules.Physics
 
         public Vector3 LineVelocity => _currentVelocity;
         public Vector3 AngularVelocity => _isRotationActive ? _currentAngularVelocity : Vector3.zero;
-        public float CurrentVelocity => Mathf.Abs(_currentVelocity.x) + Mathf.Abs(_currentVelocity.y) + Mathf.Abs(_currentVelocity.z);
-        
+
+        public float CurrentVelocity => Mathf.Abs(_currentVelocity.x) + Mathf.Abs(_currentVelocity.y) +
+                                        Mathf.Abs(_currentVelocity.z);
+
         public BallPhysics()
         {
             SetRotationActive(true);
         }
 
-        public void Configure(float linearDrag, float angularDrag, float squishFactor, float stretchFactor)
+        public void Configure(BallPhysicsConfig physicsConfig)
         {
-            _linearDrag = linearDrag;
-            _angularDrag = angularDrag;
-            _squishFactor = squishFactor;
-            _stretchFactor = stretchFactor;
+            _linearDrag = physicsConfig.LinearDrag;
+            _angularDrag = physicsConfig.AngularDrag;
+            _squishFactor = physicsConfig.SquishFactor;
+            _stretchFactor = physicsConfig.StretchFactor;
         }
 
         public void AddForce(float applyingForce, float forceDirection)
@@ -70,7 +74,7 @@ namespace Ball.Modules.Physics
             _currentAngularVelocity = -Vector3.Reflect(_currentAngularVelocity, collision.contacts[0].normal);
         }
 
-        public Vector3 GetSquishScale(Vector3 currentScale,Vector3 collidedNormal)
+        public Vector3 GetSquishScale(Vector3 currentScale, Vector3 collidedNormal)
         {
             Vector3 newScale = currentScale;
 

@@ -1,16 +1,16 @@
+using APIs.GameConfigReader;
 using CameraFollower.Model;
 using CameraFollower.Presenter;
 using CameraFollower.View;
-using Infrastructure.Data.Configurations;
-using Infrastructure.Data.Configurations.CameraFollower;
+using Infrastructure.Data.GameConfiguration;
+using Infrastructure.Data.GameConfiguration.CameraFollower;
 using Infrastructure.Services.ConfigurationProvider;
-using Infrastructure.Services.ConfigurationProvider.API;
 using UnityEngine;
 using Utils.Extensions;
 
 namespace Infrastructure.Factories.CameraFollowerFactory
 {
-    public class CameraFollowerFactory : ICameraFollowerFactory, IConfigReader
+    public class CameraFollowerFactory : ICameraFollowerFactory, IGameConfigReader
     {
         private CameraFollowerConfiguration _followConfig;
 

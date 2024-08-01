@@ -6,5 +6,6 @@ namespace Infrastructure.StaticData
         public const string Coin = "CoinConfiguration";
         public const string InitProgress = "InitialProgress";
         public const string CameraFollower = "CameraFollowerConfiguration";
+        public const string CoinDisplay = "CoinDisplayConfiguration";
     }
 }

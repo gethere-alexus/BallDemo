@@ -1,4 +1,4 @@
-using Infrastructure.Services.ProgressProvider.API;
+using APIs.ProgressInteraction;
 
 namespace Infrastructure.Services.ProgressProvider
 {

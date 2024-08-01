@@ -5,7 +5,8 @@ namespace Wallet
 {
     public interface IWallet
     {
-        BalanceBase GetCurrencyBalance(CurrencyType searchingCurrency);
+        int GetBalanceAmount(CurrencyType currencyType);
+        void AddCurrency(ICurrency currency);
         public event Action BalanceUpdated;
     }
 }
